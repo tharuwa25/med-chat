@@ -139,9 +139,9 @@ export function PlaceholdersAndVanishInput({
           });
         }
         if (newDataRef.current.length > 0) {
-          animateFrame(pos - 8);
+          return animateFrame(pos - 8); // Ensure animateFrame is used properly
         } else {
-          setValue("");
+          setValue(""); 
           setAnimating(false);
         }
       });
@@ -165,7 +165,7 @@ export function PlaceholdersAndVanishInput({
         (prev, current) => (current.x > prev ? current.x : prev),
         0
       );
-      animate(maxX);
+      animate(maxX); // Ensure animate is used properly
     }
   };
 
