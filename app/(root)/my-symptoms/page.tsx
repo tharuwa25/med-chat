@@ -73,9 +73,10 @@ const router = useRouter();
       handleResultPage(data.predicted_disease, disease1);
 };
 
-const handleResultPage = (result: string) => {
-  router.push(`/results?result=${result}&disease=${disease1}`);
+const handleResultPage = (result: string, disease: string) => {
+  router.push(`/results?result=${result}&disease=${disease}`);
 };
+
 
   const getSymptomDescription = (symptom: string) => {
     const symptomData = symptomsData.find((item) => item.name === symptom);
