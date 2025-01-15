@@ -40,7 +40,7 @@ const FindSymptoms = () => {
     console.log('message', message);
   };
 
-  const getSymptom = async (e) => {
+  const getSymptom = async (e : React.FormEvent) => {
     e.preventDefault();
 
     getSentence();
