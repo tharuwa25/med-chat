@@ -14,8 +14,8 @@ const MySymptoms = () => {
   //const [result, setResult] = useState<string>();
   const symptomsData = intenseData.symptoms;
 
-  const disease1 = disease
-
+  const disease1 = disease || 'Unknown Disease';
+  
   console.log('symptomsData', symptomsData)
   console.log('diseaes disease', disease)
 
