@@ -1,7 +1,7 @@
 // MySymptoms.tsx
 'use client';
 
-import React, { useEffect, useState, useCallback, Suspense } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import intenseData from './intense.json';
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
