@@ -1,6 +1,6 @@
 'use client';
 import { useSearchParams, useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import intenseData from './intense.json';
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 
@@ -21,19 +21,22 @@ const MySymptoms = () => {
     }
   }, [searchParams]); // Runs only on client side
 
-  const GetSymptoms = async () => {
-    const res = await fetch('http://127.0.0.1:5000/get_illess_name', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        diseases_input: disease,
-      }),
-    });
-    const data = await res.json();
-    setSymptoms(data.symptoms);
-  };
+  // Memoizing the GetSymptoms function to prevent re-creation on every render
+  const GetSymptoms = useCallback(async () => {
+    if (disease) {
+      const res = await fetch('http://127.0.0.1:5000/get_illess_name', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          diseases_input: disease,
+        }),
+      });
+      const data = await res.json();
+      setSymptoms(data.symptoms);
+    }
+  }, [disease]);
 
   useEffect(() => {
     if (disease) {
@@ -44,7 +47,7 @@ const MySymptoms = () => {
   const handleToggle = (symptom: string) => {
     setSelectedSymptoms((prevSelected) =>
       prevSelected.includes(symptom)
-        ? prevSelected.filter((s) => s !== symptom) 
+        ? prevSelected.filter((s) => s !== symptom)
         : [...prevSelected, symptom]
     );
   };
@@ -57,7 +60,7 @@ const MySymptoms = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        symptoms: cleanedSymptoms
+        symptoms: cleanedSymptoms,
       }),
     });
     const data = await res.json();
