@@ -39,7 +39,7 @@ const MySymptoms = () => {
     if (disease) {
       GetSymptoms();
     }
-  }, [disease]); // Runs when disease is available
+  }, [disease, GetSymptoms]); // Runs when disease is available
 
   const handleToggle = (symptom: string) => {
     setSelectedSymptoms((prevSelected) =>
@@ -80,7 +80,7 @@ const MySymptoms = () => {
   return (
     <div className='bg-bgColor-700 h-screen py-16'>
       <div className='bg-white p-6 m-4 rounded-lg'>
-        <h1 className="text-3xl font-bold text-center mt-8 mb-5">Let's check if you have: {disease}</h1>
+        <h1 className="text-3xl font-bold text-center mt-8 mb-5">Let us check if you have: {disease}</h1>
         <h4 className='text-xl font-bold text-center mt-8 mb-16'>Click all the symptoms that you experience right now</h4>
 
         <ToggleGroup type="multiple" className="mt-6 grid grid-cols-5 gap-4 items-center">

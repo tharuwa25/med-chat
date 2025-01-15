@@ -2,7 +2,7 @@
 import { PlaceholdersAndVanishInput } from '@/app/components/ui/placeholders-and-vanish-input';
 import Spline from '@splinetool/react-spline';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 
 const FindSymptoms = () => {
@@ -16,7 +16,13 @@ const FindSymptoms = () => {
 
   const router = useRouter();
 
-  const welcomeText = ["What is your symptom ?", "Tell us how you're feeling", "Share your health concern", "Let's get to the root of the problem", "Not feeling your best?"]
+  const welcomeText = useMemo(() => [
+    "What is your symptom ?",
+    "Tell us how you're feeling",
+    "Share your health concern",
+    "Let's get to the root of the problem",
+    "Not feeling your best?",
+  ], []);
   const [randomText, setRandomText] = useState('');
 
   useEffect(() =>{
