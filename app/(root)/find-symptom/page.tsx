@@ -1,6 +1,5 @@
 'use client';
-import InputBox2 from '@/components/InputBox2'
-import { PlaceholdersAndVanishInput } from '@/components/ui/placeholders-and-vanish-input';
+import { PlaceholdersAndVanishInput } from '@/app/components/ui/placeholders-and-vanish-input';
 import Spline from '@splinetool/react-spline';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
