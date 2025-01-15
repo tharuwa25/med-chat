@@ -11,7 +11,7 @@ const MySymptoms = () => {
   //const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]); // Track selected symptoms
   const [selectedSymptoms, setSelectedSymptoms] = useState<string>(''); // Track selected symptoms as a single string
 
-  const [result, setResult] = useState<string>();
+  //const [result, setResult] = useState<string>();
   const symptomsData = intenseData.symptoms;
 
   const disease1 = disease
@@ -36,7 +36,7 @@ const MySymptoms = () => {
 
   useEffect(() => {
     GetSymptoms();
-  }, []); // Empty dependency array ensures this runs only once
+  }, [GetSymptoms]); // Empty dependency array ensures this runs only once
 
   const handleToggle = (symptom: string) => {
     setSelectedSymptoms((prevSelected) =>
@@ -48,35 +48,13 @@ const MySymptoms = () => {
 
 
 
-// const handleToggle = (symptom: string) => {
-//   setSelectedSymptoms((prevSelected) => {
-//     const symptomsArray = prevSelected ? prevSelected.split(', ') : []; // Convert string to array if there are any selected symptoms
-//     const isSymptomSelected = symptomsArray.includes(symptom);
-
-//     if (isSymptomSelected) {
-//       // Remove the symptom from the array if it's already selected
-//       const updatedSymptoms = symptomsArray.filter(s => s !== symptom);
-//       return updatedSymptoms.join(', '); // Join them back as a single string
-//     } else {
-//       // Add the symptom to the array if it's not selected
-//       const updatedSymptoms = [...symptomsArray, symptom];
-//       return updatedSymptoms.join(', '); // Join them back as a single string
-//     }
-//   });
-// };
-
 
 const router = useRouter();
 
   const handleSubmit = async() => {
     console.log('Selected Symptoms:', selectedSymptoms); // You can handle further logic here
-    //const cleanedSymptoms = selectedSymptoms.map(symptom => symptom.replace(/_/g, ' ').trim());
     const cleanedSymptoms =  selectedSymptoms.join(", "); // Convert array to comma-separated string
 
-   //// const cleanedSymptoms = selectedSymptoms.map(symptom => {
-      // Now you can directly use .map() because selectedSymptoms is an array
-   /// /  console.log(symptom); // Replace with your actual logic
-   //// });
     console.log('Selected Symptoms:', cleanedSymptoms); // You can handle further logic here
 
     const res = await fetch('http://127.0.0.1:5000/predict', {
@@ -90,7 +68,7 @@ const router = useRouter();
       });
       const data = await res.json();
       console.log('data', data)
-      setResult(data.predicted_disease); // Assuming data.result contains the result
+      //setResult(data.predicted_disease); // Assuming data.result contains the result
       console.log('result', data.predicted_disease)
       handleResultPage(data.predicted_disease, disease1);
 };
@@ -108,8 +86,8 @@ const handleResultPage = (result: string) => {
   return (
     <div className='bg-bgColor-700 h-screen py-16'>
         <div className='bg-white p-6 m-4 rounded-lg'>
-          <h1 className='text-3xl font-bold text-center mt-8 mb-5'>Let's ckeck you have: {disease}</h1>
-          <h4 className='text-xl font-bold text-center mt-8 mb-16'>Click all the symptoms that you experience right now</h4>
+        <h1 className="text-3xl font-bold text-center mt-8 mb-5">Let&apos;s check you have: {disease}</h1>
+        <h4 className='text-xl font-bold text-center mt-8 mb-16'>Click all the symptoms that you experience right now</h4>
 
           <ToggleGroup type="multiple" className="mt-6 grid grid-cols-5 gap-4 items-center">
   {symptoms.map((symptom) => (

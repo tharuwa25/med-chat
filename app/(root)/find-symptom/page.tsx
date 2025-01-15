@@ -22,7 +22,7 @@ const FindSymptoms = () => {
   useEffect(() =>{
     const randomIndex = Math.floor(Math.random() * welcomeText.length);
     setRandomText(welcomeText[randomIndex]);
-  }, []);
+  }, [welcomeText]);
 
   // 4️⃣5️⃣6️⃣
 
