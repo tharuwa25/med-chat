@@ -4,6 +4,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
+type PixelData = {
+  x: number;
+  y: number;
+  color: string;
+  r: number;
+};
+
 export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
@@ -16,19 +23,21 @@ export function PlaceholdersAndVanishInput({
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const startAnimation = () => {
+  
+  const startAnimation = useCallback(() => {
     intervalRef.current = setInterval(() => {
       setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
     }, 3000);
-  };
-  const handleVisibilityChange = () => {
+  }, [placeholders.length]);
+
+  const handleVisibilityChange = useCallback(() => {
     if (document.visibilityState !== "visible" && intervalRef.current) {
       clearInterval(intervalRef.current); // Clear the interval when the tab is not visible
       intervalRef.current = null;
     } else if (document.visibilityState === "visible") {
       startAnimation(); // Restart the interval when the tab becomes visible
     }
-  };
+  }, [startAnimation]);
 
   useEffect(() => {
     startAnimation();
@@ -43,9 +52,9 @@ export function PlaceholdersAndVanishInput({
   }, [startAnimation, handleVisibilityChange]);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const newDataRef = useRef<any[]>([]);
+  const newDataRef = useRef<PixelData[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
   const [animating, setAnimating] = useState(false);
 
   const draw = useCallback(() => {
@@ -67,7 +76,7 @@ export function PlaceholdersAndVanishInput({
 
     const imageData = ctx.getImageData(0, 0, 800, 800);
     const pixelData = imageData.data;
-    const newData: any[] = [];
+    const newData: PixelData[] = [];
 
     for (let t = 0; t < 800; t++) {
       const i = 4 * t * 800;
@@ -165,6 +174,7 @@ export function PlaceholdersAndVanishInput({
     vanishAndSubmit();
     onSubmit && onSubmit(e);
   };
+
   return (
     <form
       className={cn(
@@ -175,7 +185,7 @@ export function PlaceholdersAndVanishInput({
     >
       <canvas
         className={cn(
-          "absolute pointer-events-none  text-base transform scale-50 top-[20%] left-2 sm:left-8 origin-top-left filter invert dark:invert-0 pr-20",
+          "absolute pointer-events-none text-base transform scale-50 top-[20%] left-2 sm:left-8 origin-top-left filter invert dark:invert-0 pr-20",
           !animating ? "opacity-0" : "opacity-100"
         )}
         ref={canvasRef}
@@ -196,7 +206,6 @@ export function PlaceholdersAndVanishInput({
           animating && "text-transparent dark:text-transparent"
         )}
       />
-
       <button
         disabled={!value}
         type="submit"
@@ -233,7 +242,6 @@ export function PlaceholdersAndVanishInput({
           <path d="M13 6l6 6" />
         </motion.svg>
       </button>
-
       <div className="absolute inset-0 flex items-center rounded-full pointer-events-none">
         <AnimatePresence mode="wait">
           {!value && (
