@@ -1,27 +1,27 @@
+// MySymptoms.tsx
 'use client';
+
+import React, { useEffect, useState, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import React, { useEffect, useState, useCallback } from 'react';
 import intenseData from './intense.json';
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 
 const MySymptoms = () => {
-  const [disease, setDisease] = useState<string | null>(null); // Track disease state
+  const [disease, setDisease] = useState<string | null>(null); 
   const searchParams = useSearchParams();
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
-
   const symptomsData = intenseData.symptoms;
   const router = useRouter();
 
   useEffect(() => {
-    // Fetch disease from search params when client-side
+    // Fetch disease from search params
     const diseaseFromParams = searchParams.get('disease');
     if (diseaseFromParams) {
       setDisease(diseaseFromParams);
     }
-  }, [searchParams]); // Runs only on client side
+  }, [searchParams]);
 
-  // Memoizing the GetSymptoms function to prevent re-creation on every render
   const GetSymptoms = useCallback(async () => {
     if (disease) {
       const res = await fetch('http://127.0.0.1:5000/get_illess_name', {
@@ -29,9 +29,7 @@ const MySymptoms = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          diseases_input: disease,
-        }),
+        body: JSON.stringify({ diseases_input: disease }),
       });
       const data = await res.json();
       setSymptoms(data.symptoms);
@@ -42,7 +40,7 @@ const MySymptoms = () => {
     if (disease) {
       GetSymptoms();
     }
-  }, [disease, GetSymptoms]); // Runs when disease is available
+  }, [disease, GetSymptoms]);
 
   const handleToggle = (symptom: string) => {
     setSelectedSymptoms((prevSelected) =>
@@ -59,9 +57,7 @@ const MySymptoms = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        symptoms: cleanedSymptoms,
-      }),
+      body: JSON.stringify({ symptoms: cleanedSymptoms }),
     });
     const data = await res.json();
     handleResultPage(data.predicted_disease, disease || 'Unknown Disease');
@@ -77,21 +73,27 @@ const MySymptoms = () => {
   };
 
   if (!disease) {
-    return <div>Loading...</div>; // Or show an appropriate loading message
+    return <div>Loading...</div>;
   }
 
   return (
-    <div className='bg-bgColor-700 h-screen py-16'>
-      <div className='bg-white p-6 m-4 rounded-lg'>
-        <h1 className="text-3xl font-bold text-center mt-8 mb-5">Let us check if you have: {disease}</h1>
-        <h4 className='text-xl font-bold text-center mt-8 mb-16'>Click all the symptoms that you experience right now</h4>
+    <div className="bg-bgColor-700 h-screen py-16">
+      <div className="bg-white p-6 m-4 rounded-lg">
+        <h1 className="text-3xl font-bold text-center mt-8 mb-5">
+          Let us check if you have: {disease}
+        </h1>
+        <h4 className="text-xl font-bold text-center mt-8 mb-16">
+          Click all the symptoms that you experience right now
+        </h4>
 
         <ToggleGroup type="multiple" className="mt-6 grid grid-cols-5 gap-4 items-center">
           {symptoms.map((symptom) => (
-            <ToggleGroupItem key={symptom} value={symptom} className='mb-8'>
+            <ToggleGroupItem key={symptom} value={symptom} className="mb-8">
               <div className="relative">
                 <button
-                  className={`bg-blue-500 text-white p-4 text-xl border-r-2 rounded-xl hover:text-white ${selectedSymptoms.includes(symptom) ? 'bg-blue-950 text-white' : ''}`}
+                  className={`bg-blue-500 text-white p-4 text-xl border-r-2 rounded-xl hover:text-white ${
+                    selectedSymptoms.includes(symptom) ? 'bg-blue-950 text-white' : ''
+                  }`}
                   onClick={() => handleToggle(symptom)}
                 >
                   {symptom.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase())}
