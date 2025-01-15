@@ -8,8 +8,8 @@ const MySymptoms = () => {
   const searchParams = useSearchParams();
   const disease = searchParams.get('disease');
   const [symptoms, setSymptoms] = useState<string[]>([]);
-  //const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]); // Track selected symptoms
-  const [selectedSymptoms, setSelectedSymptoms] = useState<string>(''); // Track selected symptoms as a single string
+  const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]); // Track selected symptoms
+  //const [selectedSymptoms, setSelectedSymptoms] = useState<string>(''); // Track selected symptoms as a single string
 
   //const [result, setResult] = useState<string>();
   const symptomsData = intenseData.symptoms;
@@ -39,21 +39,14 @@ const MySymptoms = () => {
   }, [GetSymptoms]); // Empty dependency array ensures this runs only once
 
   const handleToggle = (symptom: string) => {
-    setSelectedSymptoms((prevSelected) => {
-      const symptomsArray = prevSelected ? prevSelected.split(', ') : []; // Convert string to array if there are any selected symptoms
-      const isSymptomSelected = symptomsArray.includes(symptom);
-  
-      if (isSymptomSelected) {
-        // Remove the symptom from the array if it's already selected
-        const updatedSymptoms = symptomsArray.filter((s) => s !== symptom);
-        return updatedSymptoms.join(', '); // Join them back as a single string
-      } else {
-        // Add the symptom to the array if it's not selected
-        const updatedSymptoms = [...symptomsArray, symptom];
-        return updatedSymptoms.join(', '); // Join them back as a single string
-      }
-    });
+    setSelectedSymptoms((prevSelected) =>
+      prevSelected.includes(symptom)
+        ? prevSelected.filter((s) => s !== symptom) // Remove if already selected
+        : [...prevSelected, symptom] // Add if not selected
+    );
   };
+
+
 
 
 const router = useRouter();
