@@ -1,8 +1,8 @@
 'use client';
 import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import intenseData from './intense.json';
+import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 
 const MySymptoms = () => {
   const searchParams = useSearchParams();
