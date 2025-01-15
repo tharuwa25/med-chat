@@ -1,8 +1,11 @@
+import { Welcome } from "./components/Welcome";
 
 export default function Home() {
   return (
     <div>
-      App
+      <div className="relative">
+        <Welcome/>
+      </div>
     </div>
   );
 }
