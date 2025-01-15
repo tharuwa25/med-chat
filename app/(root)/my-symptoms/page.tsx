@@ -1,13 +1,11 @@
-// MySymptoms.tsx
 'use client';
-
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import intenseData from './intense.json';
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 
 const MySymptoms = () => {
-  const [disease, setDisease] = useState<string | null>(null); 
+  const [disease, setDisease] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
@@ -15,7 +13,6 @@ const MySymptoms = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Fetch disease from search params
     const diseaseFromParams = searchParams.get('disease');
     if (diseaseFromParams) {
       setDisease(diseaseFromParams);
@@ -119,4 +116,11 @@ const MySymptoms = () => {
   );
 };
 
-export default MySymptoms;
+// Wrap the page component with Suspense
+const MySymptomsPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <MySymptoms />
+  </Suspense>
+);
+
+export default MySymptomsPage;
