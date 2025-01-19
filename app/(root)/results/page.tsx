@@ -3,7 +3,7 @@
 import ResultNo from '@/app/components/ResultNo';
 import ResultYes from '@/app/components/ResultYes';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 
 const Results = () => {
@@ -20,7 +20,7 @@ const Results = () => {
     const [prevention, setPrevetion] = useState<string[]>([]);
     //const [other, setOther] = useState<Record<string, boolean> | null>(null);
 
-    const displayResult = async () => {
+    const displayResult = useCallback(async () => {
         if (diseaes == 'No_Matching') {
             const res = 'No_Matching';
             updateAllergy(res);
