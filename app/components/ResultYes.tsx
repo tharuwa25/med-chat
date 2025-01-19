@@ -2,11 +2,11 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { BackgroundGradient } from './ui/background-gradient';
 
-interface ResultProps {
-    diseaes: string,
-    disc: string[]
-    prevention:string[]
-}
+// interface ResultProps {
+//     diseaes: string,
+//     disc: string[]
+//     prevention:string[]
+// }
 
 interface ResultYesProps {
     diseaes: string | string[];
