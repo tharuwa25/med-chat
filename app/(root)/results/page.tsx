@@ -51,7 +51,7 @@ const Results = () => {
         //setOther(savedDetails);
 
         displayResult();
-    }, []);
+    }, [displayResult]);
 
     const updateAllergy = (resl) => {
         // Retrieve the current details from localStorage
