@@ -28,7 +28,7 @@ const ResultNo = ({pass}) => {
             <div className='m-6'>
         <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 m-2">
             
-            <h3 className='font-bold mb-2'>Seems like you doesn't diagonse from </h3>
+            <h3 className='font-bold mb-2'>Seems like you does not diagonse from </h3>
             
             <p className='text-blue-500 font-bold text-2xl mb-6'>{pass}</p>
 

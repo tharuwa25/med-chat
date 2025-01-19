@@ -17,7 +17,7 @@ const Results = () => {
 
     const [disc, setDisc] = useState('');
     const [prevention, setPrevetion] = useState<string[]>([]);
-    const [other, setOther] = useState<Record<string, boolean> | null>(null);
+    //const [other, setOther] = useState<Record<string, boolean> | null>(null);
 
     const displayResult = async () => {
         if (diseaes == 'No_Matching'){
@@ -47,8 +47,8 @@ const Results = () => {
 
     useEffect(() => {
         // Only runs on the client side
-        const savedDetails = JSON.parse(localStorage.getItem('details'));
-        setOther(savedDetails);
+        //const savedDetails = JSON.parse(localStorage.getItem('details'));
+        //setOther(savedDetails);
 
         displayResult();
     }, []);

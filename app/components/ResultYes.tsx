@@ -26,8 +26,8 @@ const ResultYes: React.FC<ResultProps> = ({diseaes, disc, prevention}) => {
     };
     const router = useRouter();
 
-    const handleNextDiseasePage = (item: string) => {
-    }
+    // const handleNextDiseasePage = (item: string) => {
+    // }
 
 
   return (
