@@ -78,7 +78,7 @@ const Results = () => {
         localStorage.setItem('details', JSON.stringify(savedDetails));
     
         // Update the state to reflect changes
-        setOther(savedDetails);
+        //setOther(savedDetails);
     };
     
     
