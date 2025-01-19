@@ -51,7 +51,7 @@ const Results = () => {
             console.log('prevention', data.prevntion_list);
             setLoading(true);
         }
-    };
+    }, [diseaes, pass]);
     
 
     useEffect(() => {
