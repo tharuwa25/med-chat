@@ -157,16 +157,16 @@ const FindSymptoms = () => {
           </h5>
     
           <div className='bg-bgColor-200 p-8 border-black rounded-sm border-2 ml-16 mr-16 text-center'>
-
-            {diseases.map((item, index) => (
-              <>
-              <button key={index} className='bg-white p-4 text-xl rounded-xl mr-8 hover:bg-slate-400' onClick={() => handleNextPage(item)}>
-              {item}
-            </button>
-              </>
-            ))}
-
-          </div>
+  {diseases.map((item) => (
+    <button
+      key={item}  // Use the item as the unique key
+      className='bg-white p-4 text-xl rounded-xl mr-8 hover:bg-slate-400'
+      onClick={() => handleNextPage(item)}
+    >
+      {item}
+    </button>
+  ))}
+</div>
 
           <h5 className='font-bold text-2xl text-black mb-6 text-center mt-6'>
            To get a more accurate diagnosis, we recommend to click on a illness.
