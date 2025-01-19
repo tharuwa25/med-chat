@@ -96,8 +96,8 @@ const Results = () => {
                   </>
                 ))}
             </div> */}
-            <ResultNo pass={pass}/>
-            </>
+                <ResultNo pass={pass || ''} />
+                </>
             ) : (
                 <>
                 
