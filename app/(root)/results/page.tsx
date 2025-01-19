@@ -20,10 +20,10 @@ const Results = () => {
     //const [other, setOther] = useState<Record<string, boolean> | null>(null);
 
     const displayResult = async () => {
-        if (diseaes == 'No_Matching'){
-            const res = 'No_Matching'
-            updateAllergy(res)
-        }else{
+        if (diseaes == 'No_Matching') {
+            const res = 'No_Matching';
+            updateAllergy(res);
+        } else {
             const res = await fetch('http://127.0.0.1:5000/getpreventions', {
                 method: 'POST',
                 headers: {
@@ -31,19 +31,27 @@ const Results = () => {
                 },
                 body: JSON.stringify({
                     diseases: diseaes,
-                   //predicted_disease : diseaes
+                    //predicted_disease : diseaes
                 }),
             });
     
             const data = await res.json();
-            console.log('data.description', data.description)
+            console.log('data.description', data.description);
             setDisc(data.desc);
             setPrevetion(data.prevntion_list);
-            updateAllergy(pass);
+    
+            // Ensure 'pass' is a string before calling updateAllergy
+            if (pass) {
+                updateAllergy(pass);  // Only call if 'pass' is not null
+            } else {
+                console.log('pass is null, skipping updateAllergy');
+            }
+    
             console.log('prevention', data.prevntion_list);
-            setLoading(true)
+            setLoading(true);
         }
     };
+    
 
     useEffect(() => {
         // Only runs on the client side
