@@ -1,3 +1,5 @@
+'use client';  // Add this line at the top
+
 import { Suspense } from 'react';
 import ResultNo from '@/app/components/ResultNo';
 import ResultYes from '@/app/components/ResultYes';
