@@ -109,8 +109,9 @@ const Results = () => {
                     </p>
                 ))}
             </div> */}
-            <ResultYes diseaes={diseaes} disc={disc} prevention={prevention}/>
-                </>
+<ResultYes diseaes={diseaes || ''} disc={disc} prevention={prevention} />
+
+</>
             )}
 
             {/* <button onClick={updateAllergy}>Update Allergy to False</button> */}
