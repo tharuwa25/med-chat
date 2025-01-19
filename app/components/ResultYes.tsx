@@ -8,7 +8,14 @@ interface ResultProps {
     prevention:string[]
 }
 
-const ResultYes: React.FC<ResultProps> = ({diseaes, disc, prevention}) => {
+interface ResultYesProps {
+    diseaes: string | string[];
+    disc: string;
+    prevention: string[];
+  }
+  
+
+const ResultYes: React.FC<ResultYesProps> = ({diseaes, disc, prevention}) => {
 
     console.log('prevention', prevention)
 

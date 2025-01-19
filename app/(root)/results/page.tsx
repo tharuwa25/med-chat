@@ -5,6 +5,7 @@ import ResultYes from '@/app/components/ResultYes';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
+
 const Results = () => {
     const searchParams = useSearchParams();
     const diseaes = searchParams.get('result');
@@ -109,7 +110,7 @@ const Results = () => {
                     </p>
                 ))}
             </div> */}
-<ResultYes diseaes={diseaes || ''} disc={disc} prevention={prevention} />
+<ResultYes diseaes={[diseaes || '']} disc={disc} prevention={prevention} />
 
 </>
             )}
