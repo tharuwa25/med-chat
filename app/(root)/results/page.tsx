@@ -53,27 +53,26 @@ const Results = () => {
         displayResult();
     }, [displayResult]);
 
-    const updateAllergy = (resl) => {
+    const updateAllergy = (resl: string) => {  // Explicitly typing 'resl' as a string
         // Retrieve the current details from localStorage
         const savedDetails = JSON.parse(localStorage.getItem('details')) || {};
-
-        if (resl = "No_Matching"){
-
-        }else{
+    
+        if (resl === "No_Matching") {
+            // Handle the case when resl is "No_Matching"
+        } else {
             // Update the 'Allergy' value to false without losing other values
             savedDetails[resl] = false;
         }
-
-        
-
-        console.log('savedDetails', savedDetails, resl)
-
+    
+        console.log('savedDetails', savedDetails, resl);
+    
         // Save the updated details back to localStorage
         localStorage.setItem('details', JSON.stringify(savedDetails));
-
+    
         // Update the state to reflect changes
         setOther(savedDetails);
     };
+    
 
     return (
         <div>
