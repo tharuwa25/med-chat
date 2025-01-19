@@ -61,10 +61,10 @@ const Results = () => {
         displayResult();
     }, [displayResult]);
 
-    const updateAllergy = (resl: string) => {  // Explicitly typing 'resl' as a string
-        // Retrieve the current details from localStorage
-        const savedDetails = JSON.parse(localStorage.getItem('details')) || {};
-    
+    const updateAllergy = (resl: string) => {  
+        // Retrieve the current details from localStorage and ensure it's an object
+        const savedDetails = JSON.parse(localStorage.getItem('details') || '{}');  // Default to '{}' if null
+        
         if (resl === "No_Matching") {
             // Handle the case when resl is "No_Matching"
         } else {
@@ -80,6 +80,7 @@ const Results = () => {
         // Update the state to reflect changes
         setOther(savedDetails);
     };
+    
     
 
     return (
