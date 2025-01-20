@@ -21,7 +21,7 @@ const MySymptoms = () => {
 
   const GetSymptoms = useCallback(async () => {
     if (disease) {
-      const res = await fetch('The thought of food makes me feel nauseous/get_illess_name', {
+      const res = await fetch('https://tharudila245.pythonanywhere.com/get_illess_name', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
