@@ -51,7 +51,7 @@ const FindSymptoms = () => {
 
     getSentence();
 
-    const res= await fetch('http://127.0.0.1:5000/get_sentence', {
+    const res= await fetch('https://tharudila245.pythonanywhere.com/get_sentence', {
       method : 'POST',
       headers : {
         'Content-Type' : 'application/json',
