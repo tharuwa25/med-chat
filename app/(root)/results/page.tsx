@@ -22,7 +22,7 @@ const Results = () => {
             const res = 'No_Matching';
             updateAllergy(res);
         } else {
-            const res = await fetch('http://127.0.0.1:5000/getpreventions', {
+            const res = await fetch('https://tharudila245.pythonanywhere.com/getpreventions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
