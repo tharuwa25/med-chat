@@ -12,6 +12,7 @@ const FindSymptoms = () => {
   const[message, setMessage] = useState('');
   const[symptom, setSymptom] = useState('');
   const[diseases, setDiseases] = useState([]); // Added disease state
+  const [error, setError] = useState('');
 
 
   const router = useRouter();
@@ -83,6 +84,12 @@ const FindSymptoms = () => {
 
     const data2 = await res2.json();
     console.log('data 4️⃣', data2)
+
+    
+    if (data2.message === 'Enter correct symptom') {
+      setError(`Currently MEDCHAT dont support for your symptom ${transformedMessage}`);
+    } else {
+
    // Store diseases in the state
    setDiseases(data2.diseases);
 
@@ -96,7 +103,7 @@ const FindSymptoms = () => {
   
       localStorage.setItem('details', JSON.stringify(details));
       setLoading(true)
-
+      }
   }
 
   useEffect(() => {
@@ -109,6 +116,25 @@ const FindSymptoms = () => {
     router.push(`/my-symptoms?disease=${encodeURIComponent(item)}`);
   };
 
+  // Error modal component
+  const ErrorModal = ({ message, onClose }: { message: string; onClose: () => void }) => {
+    return (
+      <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+        <div className="bg-white p-8 rounded-md w-96 relative">
+          {/* <h4 className="font-bold text-xl text-red-500">Error</h4> */}
+          <p className="text-red-500">{message}</p>
+          
+          {/* Close icon in the top-right corner */}
+          <span
+            onClick={onClose}
+            className="absolute top-2 right-2 cursor-pointer text-2xl text-gray-600 hover:text-gray-800"
+          >
+            &times; {/* This is the "X" icon for close */}
+          </span>
+        </div>
+      </div>
+    );
+  };
   
   return (
     <div className='bg-bgColor-400 h-screen py-16'>
@@ -209,7 +235,8 @@ const FindSymptoms = () => {
       ) : (
         <></>
       )}
-
+{/* Show the error modal if error state is set */}
+{error && <ErrorModal message={error} onClose={() => setError('')} />}
     </div>
   )
 }
