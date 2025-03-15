@@ -18,9 +18,9 @@
         "name": "next"
       }
     ],
-    "baseUrl": "./src",  // Add baseUrl to point to the src folder
+    "baseUrl": ".",  // Make the root of the project the base directory
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./*"]  // This will map all imports under the project root
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
