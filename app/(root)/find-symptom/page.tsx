@@ -1,5 +1,5 @@
 'use client';
-import { PlaceholdersAndVanishInput } from '@/app/components/ui/placeholders-and-vanish-input';
+import { PlaceholdersAndVanishInput } from '../../components/ui/placeholders-and-vanish-input';
 //import Spline from '@splinetool/react-spline';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
