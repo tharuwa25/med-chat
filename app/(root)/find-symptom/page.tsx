@@ -1,6 +1,6 @@
 'use client';
 import { PlaceholdersAndVanishInput } from '@/app/components/ui/placeholders-and-vanish-input';
-import Spline from '@splinetool/react-spline';
+//import Spline from '@splinetool/react-spline';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useMemo } from 'react';
@@ -157,7 +157,7 @@ const FindSymptoms = () => {
       {!loading && (
         <div className="flex justify-center items-center mt-8">
           <Image 
-            src='/banner.jpg' 
+            src='/banner.png' 
             width={700} 
             height={300} 
             alt="Banner image"
